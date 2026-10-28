@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Extblocker</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">EX</div>
+      <div class="brand-copy">
+        <h1>Extblocker</h1>
+        <p id="connection-label">Pi-hole control panel</p>
+      </div>
+      <span class="version-tag">PI-HOLE V6</span>
+    </header>
+
+    <main>
+      <section id="connect-view" class="connect-view" aria-labelledby="connect-title">
+        <p class="eyebrow">YOUR NETWORK</p>
+        <h2 id="connect-title">Connect to Pi-hole</h2>
+        <p class="intro">Use your Pi-hole address and web interface password to view and control DNS blocking.</p>
+        <form id="connect-form">
+          <label for="server-input">Pi-hole address</label>
+          <input id="server-input" name="server" type="url" placeholder="http://pi.hole" autocomplete="url" required>
+          <label for="password-input">Web interface password</label>
+          <input id="password-input" name="password" type="password" autocomplete="current-password" required>
+          <div class="form-actions">
+            <button id="cancel-settings" class="text-button" type="button" hidden>Cancel</button>
+            <button id="connect-button" class="primary-button" type="submit">Connect</button>
+          </div>
+        </form>
+        <p class="privacy-note">Your password is used to sign in and is not saved.</p>
+      </section>
+
+      <section id="dashboard-view" class="dashboard-view" aria-label="Pi-hole status" hidden>
+        <div class="status-panel">
+          <div class="status-copy">
+            <p class="eyebrow">DNS PROTECTION</p>
+            <h2 id="blocking-label">Checking status</h2>
+            <p id="blocking-detail">Contacting your Pi-hole</p>
+          </div>
+          <span id="status-indicator" class="status-indicator" aria-hidden="true"></span>
+        </div>
+        <button id="toggle-button" class="toggle-button" type="button" disabled>Loading</button>
+
+        <div class="stats-heading">
+          <h2>Today at a glance</h2>
+          <button id="refresh-button" class="icon-button" type="button" title="Refresh statistics" aria-label="Refresh statistics">Refresh</button>
+        </div>
+        <dl class="stats-grid">
+          <div class="stat-cell">
+            <dt>Queries</dt>
+            <dd id="queries-value">--</dd>
+          </div>
+          <div class="stat-cell">
+            <dt>Blocked</dt>
+            <dd id="blocked-value">--</dd>
+          </div>
+          <div class="stat-cell">
+            <dt>Blocked share</dt>
+            <dd id="percent-value">--</dd>
+          </div>
+          <div class="stat-cell">
+            <dt>Blocked domains</dt>
+            <dd id="domains-value">--</dd>
+          </div>
+        </dl>
+        <button id="settings-button" class="settings-button" type="button">Change Pi-hole connection</button>
+      </section>
+
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+    </main>
+
+    <footer>
+      <span>Extblocker | Pi-hole v6 API</span>
+      <a id="admin-link" href="http://pi.hole/admin/" target="_blank" rel="noreferrer">Open dashboard</a>
+    </footer>
+    <script src="popup.js"></script>
+  </body>
+</html>

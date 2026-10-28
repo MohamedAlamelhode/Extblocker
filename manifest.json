@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Extblocker",
+  "version": "1.0.0",
+  "description": "Check and control Pi-hole v6 from your browser.",
+  "minimum_chrome_version": "102",
+  "permissions": ["storage"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "action": {
+    "default_title": "Extblocker",
+    "default_popup": "popup.html"
+  }
+}
