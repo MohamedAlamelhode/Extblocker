@@ -23,6 +23,8 @@ PIHOLE_PASSWORD='choose-a-password' docker compose up -d
 
 In Extblocker, connect to `http://localhost:8080` and use the password you chose. Open the Pi-hole dashboard at `http://localhost:8080/admin/`.
 
+When using an Android emulator, use `http://10.0.2.2:8080` instead of `localhost`; `10.0.2.2` is the emulator's alias for the host machine. The dashboard is at `http://10.0.2.2:8080/admin/`.
+
 Host port 53 must be available for Pi-hole DNS. If another DNS service is using it, stop that service or change the host-side `53` port mappings in `compose.yaml`.
 
 The first startup downloads Pi-hole's gravity blocklist and requires outbound DNS and HTTPS access from the container.
