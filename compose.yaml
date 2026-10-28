@@ -1,0 +1,19 @@
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: extblocker-pihole
+    hostname: pihole
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+      FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD:?Set PIHOLE_PASSWORD before starting Pi-hole}
+      FTLCONF_dns_listeningMode: ALL
+    ports:
+      - "127.0.0.1:53:53/tcp"
+      - "127.0.0.1:53:53/udp"
+      - "127.0.0.1:8080:80/tcp"
+    volumes:
+      - pihole_data:/etc/pihole
+    restart: unless-stopped
+
+volumes:
+  pihole_data:

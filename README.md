@@ -13,6 +13,20 @@ The API integration is based on the Pi-hole v6.5 source and API usage described 
 
 The extension requests access only to the Pi-hole host you enter. The address is saved locally; the password is not saved, and the API session is kept only for the current browser session.
 
+## Run Pi-hole with Docker
+
+The included Compose file runs the official Pi-hole container with persistent configuration and DNS ports published only on localhost. Choose a web interface password and start it with Docker Compose:
+
+```sh
+PIHOLE_PASSWORD='choose-a-password' docker compose up -d
+```
+
+In Extblocker, connect to `http://localhost:8080` and use the password you chose. Open the Pi-hole dashboard at `http://localhost:8080/admin/`.
+
+Host port 53 must be available for Pi-hole DNS. If another DNS service is using it, stop that service or change the host-side `53` port mappings in `compose.yaml`.
+
+The first startup downloads Pi-hole's gravity blocklist and requires outbound DNS and HTTPS access from the container.
+
 ## Features
 
 - Live Pi-hole query count, blocked query count, blocked percentage, and gravity domain count

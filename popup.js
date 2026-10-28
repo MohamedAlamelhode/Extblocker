@@ -36,10 +36,22 @@ function showDashboardView() {
 
 function normalizeServer(value) {
   const entered = value.trim();
-  const address = new URL(/^[a-z][a-z\d+.-]*:\/\//i.test(entered) ? entered : `http://${entered}`);
-  if (!(["http:", "https:"].includes(address.protocol)) || address.username || address.password || address.search || address.hash) {
+  if (!entered) {
     throw new Error("Enter a valid HTTP or HTTPS Pi-hole address.");
   }
+
+  const candidate = /^[a-z][a-z\d+.-]*:\/\//i.test(entered) ? entered : `http://${entered}`;
+  let address;
+  try {
+    address = new URL(candidate);
+  } catch {
+    throw new Error("Enter a valid HTTP or HTTPS Pi-hole address.");
+  }
+
+  if (!(address.protocol === "http:" || address.protocol === "https:") || address.username || address.password || address.search || address.hash || (address.pathname && address.pathname !== "/")) {
+    throw new Error("Enter a valid HTTP or HTTPS Pi-hole address.");
+  }
+
   return address.origin;
 }
 
